@@ -7,11 +7,20 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  carrot : {
+      position: 'relative',
+      top: '7px',
+      "&:hover": {
+        fontSize: "2em",
+        fill: "green"
+      },
+  }
 });
 
 export default function SimpleTable(props) {
@@ -24,7 +33,10 @@ export default function SimpleTable(props) {
         <TableHead>
           <TableRow>
             <TableCell align="center">Image</TableCell>
-            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">
+                Name
+                <ArrowDropDownIcon className={classes.carrot} onClick={props.sortByLastName}/>
+            </TableCell>
             <TableCell align="center">Phone</TableCell>
             <TableCell align="center">Email</TableCell>
             <TableCell align="center">DOB</TableCell>

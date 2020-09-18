@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,43 +14,32 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleTable() {
-    const [employeeState, setEmployeeState] = useState({
-        employees: []
-    })
+export default function SimpleTable(props) {
 
     const classes = useStyles();
-    
-    useEffect(() => {
-        fetch('https://randomuser.me/api/?results=10', {
-            method: 'GET'
-        }).then(response => response.json())
-        .then(data => setEmployeeState({employees : data.results}));
-
-    }, [])
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Image</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Phone</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">DOB</TableCell>
+            <TableCell align="center">Image</TableCell>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Phone</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">DOB</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {employeeState.employees.length > 0 ? 
-          employeeState.employees.map((employee, index) => {
+        {props.employees.length > 0 ? 
+          props.employees.map((employee, index) => {
               return (
             <TableRow key={index}>
-              <TableCell component="th" scope="row" align="right"><img src={employee.picture.medium} alt=""></img></TableCell>
-              <TableCell align="right">{`${employee.name.first} ${employee.name.last}`}</TableCell>
-              <TableCell align="right">{employee.phone}</TableCell>
-              <TableCell align="right">{employee.email}</TableCell>
-              <TableCell align="right">{new Date(employee.dob.date).toLocaleDateString()}</TableCell>
+              <TableCell component="th" scope="row" align="center"><img src={employee.picture.medium} alt=""></img></TableCell>
+              <TableCell align="center">{`${employee.name.first} ${employee.name.last}`}</TableCell>
+              <TableCell align="center">{employee.phone}</TableCell>
+              <TableCell align="center">{employee.email}</TableCell>
+              <TableCell align="center">{new Date(employee.dob.date).toLocaleDateString()}</TableCell>
             </TableRow>
               )
             }) :  <TableRow>
